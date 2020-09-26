@@ -13,7 +13,7 @@ pipeline {
         git branch: 'master',
             url: 'https://github.com/FreeCAD/FreeCAD'
 
-        sh "ls -lat"
+        sh 'ls -lat'
       }
     }
 

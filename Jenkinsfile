@@ -10,15 +10,18 @@ pipeline {
     agent { dockerfile true }
     stage('Fetch sources') {
       steps {
-        git checkout https://github.com/FreeCAD/FreeCAD
+        git branch: 'master',
+            url: 'https://github.com/FreeCAD/FreeCAD'
+
+        sh "ls -lat"
       }
     }
 
     stage('Build') {
       steps {
-        mkdir build; cd build
-        cmake ../freecad-source -DBUILD_QT5=ON -DPYTHON_EXECUTABLE=/usr/bin/python3 -DUSE_PYBIND11=ON
-        make -j4
+        sh 'mkdir build; cd build'
+        sh 'cmake ../freecad-source -DBUILD_QT5=ON -DPYTHON_EXECUTABLE=/usr/bin/python3 -DUSE_PYBIND11=ON'
+        sh 'make -j4'
       }
     }
 

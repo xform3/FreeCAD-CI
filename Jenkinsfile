@@ -4,9 +4,7 @@
 
 
 pipeline {
-  // agent any
   agent { 
-    label 'freecad-build'
     dockerfile {
       filename 'Dockerfile'
     }

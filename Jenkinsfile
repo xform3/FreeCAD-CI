@@ -4,7 +4,13 @@
 
 
 pipeline {
-  agent { dockerfile true }
+  // agent any
+  agent { 
+    label 'freecad-build'
+    dockerfile {
+      filename 'Dockerfile'
+    }
+  }
 
   stages {
     stage('Fetch sources') {

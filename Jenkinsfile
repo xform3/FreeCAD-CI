@@ -4,10 +4,9 @@
 
 
 pipeline {
-  agent any
+  agent { dockerfile true }
 
   stages {
-    agent { dockerfile true }
     stage('Fetch sources') {
       steps {
         git branch: 'master',

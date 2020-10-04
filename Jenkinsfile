@@ -13,8 +13,7 @@ pipeline {
   stages {
     stage('Fetch sources') {
       steps {
-        git branch: 'master', url: 'https://github.com/FreeCAD/FreeCAD', timeout: 25
-
+        git branch: 'master', url: 'https://github.com/FreeCAD/FreeCAD'
         sh 'ls -lat'
       }
     }

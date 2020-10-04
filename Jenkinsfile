@@ -15,6 +15,7 @@ pipeline {
       steps {
         git branch: 'master',
             url: 'https://github.com/FreeCAD/FreeCAD'
+            timeout: 25
 
         sh 'ls -lat'
       }

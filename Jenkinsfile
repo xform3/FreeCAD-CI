@@ -13,7 +13,6 @@ pipeline {
   stages {
     stage('Fetch sources') {
       steps {
-        git branch: 'master', url: 'https://github.com/FreeCAD/FreeCAD'
         sh 'ls -lat'
       }
     }
@@ -21,7 +20,7 @@ pipeline {
     stage('Build') {
       steps {
         sh 'mkdir build; cd build'
-        sh 'cmake ../freecad-source -DBUILD_QT5=ON -DPYTHON_EXECUTABLE=/usr/bin/python3 -DUSE_PYBIND11=ON'
+        sh 'cmake ../ -DBUILD_QT5=ON -DPYTHON_EXECUTABLE=/usr/bin/python3 -DUSE_PYBIND11=ON'
         sh 'make -j4'
       }
     }

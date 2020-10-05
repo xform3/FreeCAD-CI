@@ -53,6 +53,9 @@ RUN set -ex; \
         qtbase5-dev \
         qttools5-dev \
         swig \
+        build-essential \
+        libtool \
+        lsb-release \
 		; \
 		rm -rf /var/lib/apt/lists/*; \
 	fi

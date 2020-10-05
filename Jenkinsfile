@@ -19,7 +19,7 @@ pipeline {
 
     stage('Build') {
       steps {
-        sh 'mkdir build; cd build; cmake ../ -DBUILD_QT5=ON -DPYTHON_EXECUTABLE=/usr/bin/python3 -DUSE_PYBIND11=ON && make -j4'
+        sh 'mkdir -p build; cd build; cmake ../ -DBUILD_QT5=ON -DPYTHON_EXECUTABLE=/usr/bin/python3 -DUSE_PYBIND11=ON && make -j4'
       }
     }
 

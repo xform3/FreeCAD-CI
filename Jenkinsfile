@@ -23,12 +23,6 @@ pipeline {
       }
     }
 
-    post {
-      success {
-        archiveArtifacts artifacts: 'build/FreeCAD', fingerprint: true
-      }
-    }
-
     stage('Create App Image') {
       steps {
         echo 'Skipping creating images'
@@ -39,6 +33,12 @@ pipeline {
       steps {
         echo 'Skipping uploading app images'
       }
+    }
+  }
+
+  post {
+    success {
+      archiveArtifacts artifacts: 'build/FreeCAD', fingerprint: true
     }
   }
 

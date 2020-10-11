@@ -56,7 +56,12 @@ RUN set -ex; \
         build-essential \
         libtool \
         lsb-release \
+        desktop-file-utils \
+        jq \
+        zsync \
+        p7zip-full \
+        curl \
 		; \
 		rm -rf /var/lib/apt/lists/*; \
-	fi
+    fi
 

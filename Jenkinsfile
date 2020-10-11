@@ -19,7 +19,13 @@ pipeline {
 
     stage('Build') {
       steps {
-        sh 'mkdir -p build; cd build; cmake ../FreeCAD -DBUILD_QT5=ON -DPYTHON_EXECUTABLE=/usr/bin/python3 -DUSE_PYBIND11=ON && make -j4'
+        sh 'mkdir -p build; cd build; mkdir FreeCAD; cmake ../FreeCAD -DCMAKE_INSTALL_REFIX=`pwd`/FreeCAD -DBUILD_QT5=ON -DPYTHON_EXECUTABLE=/usr/bin/python3 -DUSE_PYBIND11=ON && make -j4 install'
+      }
+    }
+
+    post {
+      success {
+        archiveArtifacts artifacts: 'build/FreeCAD`, fingerprint: true
       }
     }
 

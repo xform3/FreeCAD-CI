@@ -25,7 +25,7 @@ pipeline {
 
     post {
       success {
-        archiveArtifacts artifacts: 'build/FreeCAD`, fingerprint: true
+        archiveArtifacts artifacts: 'build/FreeCAD', fingerprint: true
       }
     }
 

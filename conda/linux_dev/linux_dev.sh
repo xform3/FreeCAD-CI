@@ -1,3 +1,6 @@
+# update conda
+conda update -n base -c defaults conda
+
 # assume we have a working conda available
 conda create \
     -p AppDir/usr \
@@ -52,7 +55,6 @@ rm -rf AppDir/usr/lib/cmake/
 
 find . -name "*.h" -type f -delete
 find . -name "*.cmake" -type f -delete
-
 # Add libnsl (Fedora 28 and up)
 cp ../../libc6/lib/x86_64-linux-gnu/libnsl* AppDir/usr/lib/
 

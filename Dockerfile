@@ -62,6 +62,7 @@ RUN set -ex; \
         p7zip-full \
         curl \
         ca-certificates \
+        wget \
 		; \
 		rm -rf /var/lib/apt/lists/*; \
     fi

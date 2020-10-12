@@ -32,7 +32,7 @@ pipeline {
             wget "https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage"; \
             chmod a+x appimagetool-x86_64.AppImage; \
             '
-        sh 'apt-get download libc6; dpkg -x libc6*.deb libc6;'
+        sh 'apt-get update; apt-get download libc6; dpkg -x libc6*.deb libc6;'
       }
     }
 

@@ -24,13 +24,16 @@ pipeline {
     }
 
     stage('Install App Image Tools') {
-      sh 'rm -f appimagetool-x86_64.AppImage pkg2appimage; \
-          curl -LO https://raw.githubusercontent.com/AppImage/AppImages/master/pkg2appimage; \
-          wget "https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage"; \
-          chmod a+x appimagetool-x86_64.AppImage; \
-          '
+      steps {
+        echo 'Installing App Image Tools'
+        sh 'rm -f appimagetool-x86_64.AppImage pkg2appimage; \
+            curl -LO https://raw.githubusercontent.com/AppImage/AppImages/master/pkg2appimage; \
+            wget "https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage"; \
+            chmod a+x appimagetool-x86_64.AppImage; \
+            '
+      }
     }
-    
+
     stage('Create App Image') {
       steps {
         echo 'Creating App Image'

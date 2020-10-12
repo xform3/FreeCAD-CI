@@ -26,7 +26,7 @@ pipeline {
     stage('Install App Image Tools') {
       steps {
         echo 'Installing App Image Tools'
-        sh 'rm -f appimagetool-x86_64.AppImage pkg2appimage miniconda; \
+        sh 'rm -rf appimagetool-x86_64.AppImage pkg2appimage miniconda; \
             curl -LO https://raw.githubusercontent.com/AppImage/AppImages/master/pkg2appimage; \
             wget "https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage"; \
             chmod a+x appimagetool-x86_64.AppImage; \

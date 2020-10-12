@@ -61,6 +61,7 @@ RUN set -ex; \
         zsync \
         p7zip-full \
         curl \
+        ca-certificates \
 		; \
 		rm -rf /var/lib/apt/lists/*; \
     fi

@@ -26,11 +26,13 @@ pipeline {
     stage('Install App Image Tools') {
       steps {
         echo 'Installing App Image Tools'
-        sh 'rm -rf appimagetool-x86_64.AppImage* pkg2appimage miniconda; \
+        sh 'export HOME=`pwd`; \
+            rm -rf appimagetool-x86_64.AppImage* pkg2appimage miniconda; \
             curl -LO https://raw.githubusercontent.com/AppImage/AppImages/master/pkg2appimage; \
             wget "https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage"; \
             chmod a+x appimagetool-x86_64.AppImage; \
             '
+        sh 'apt-get download libc6; dpkg -x libc6*.deb libc6;'
       }
     }
 
@@ -38,9 +40,11 @@ pipeline {
       steps {
         echo 'Creating App Image'
 
-        sh 'wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh; \
+        sh 'export HOME=`pwd`; \
+            wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh; \
             bash miniconda.sh -b -p miniconda; \
             . miniconda/etc/profile.d/conda.sh; \
+            mkdir -p conda/linux_dev/AppDir/usr; \
             cp -r build/FreeCAD/* conda/linux_dev/AppDir/usr; cd conda/linux_dev; bash ./linux_dev.sh; \
             '
       }

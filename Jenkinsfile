@@ -23,17 +23,23 @@ pipeline {
       }
     }
 
+    stage('Install App Image Tools') {
+      sh 'rm -f appimagetool-x86_64.AppImage pkg2appimage; \
+          curl -LO https://raw.githubusercontent.com/AppImage/AppImages/master/pkg2appimage; \
+          wget "https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage"; \
+          chmod a+x appimagetool-x86_64.AppImage; \
+          '
+    }
+    
     stage('Create App Image') {
       steps {
         echo 'Creating App Image'
-        sh 'curl -LO https://raw.githubusercontent.com/AppImage/AppImages/master/pkg2appimage; \
-            wget "https://github.com/AppImage/AppImageKit/releases/download/continuous/appimagetool-x86_64.AppImage"; \
-            chmod a+x appimagetool-x86_64.AppImage; \
-            wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh; \
+
+        sh 'wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh; \
             bash miniconda.sh -b -p miniconda; \
             . miniconda/etc/profile.d/conda.sh; \
+            cp -r build/FreeCAD/* conda/linux_dev/AppDir; cd conda/linux_stable; bash ./linux_stable.sh; \
             '
-        sh 'cp -r build/FreeCAD/* conda/linux_dev/AppDir; cd conda/linux_stable; bash ./linux_stable.sh; cd ../;'
       }
     }
 

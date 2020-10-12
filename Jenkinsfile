@@ -41,7 +41,7 @@ pipeline {
         sh 'wget https://repo.continuum.io/miniconda/Miniconda3-latest-Linux-x86_64.sh -O miniconda.sh; \
             bash miniconda.sh -b -p miniconda; \
             . miniconda/etc/profile.d/conda.sh; \
-            cp -r build/FreeCAD/* conda/linux_dev/AppDir; cd conda/linux_dev; bash ./linux_dev.sh; \
+            cp -r build/FreeCAD/* conda/linux_dev/AppDir/usr; cd conda/linux_dev; bash ./linux_dev.sh; \
             '
       }
     }

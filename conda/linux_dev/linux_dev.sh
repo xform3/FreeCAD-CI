@@ -1,3 +1,6 @@
+# Set current dir as home
+export HOME=`pwd`
+
 # update conda
 conda update -n base -c defaults conda
 

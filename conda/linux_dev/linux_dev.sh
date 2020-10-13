@@ -31,11 +31,11 @@ find AppDir/usr -name \*.a -delete
 mv AppDir/usr/bin AppDir/usr/bin_tmp
 mkdir AppDir/usr/bin
 cp AppDir/usr/bin_tmp/FreeCAD AppDir/usr/bin/
-cp AppDir/usr/bin_tmp/freecadcmd AppDir/usr/bin/
+cp AppDir/usr/bin_tmp/FreeCADCmd AppDir/usr/bin/
 cp AppDir/usr/bin_tmp/ccx AppDir/usr/bin/
 cp AppDir/usr/bin_tmp/python AppDir/usr/bin/
 cp AppDir/usr/bin_tmp/pip AppDir/usr/bin/
-cp AppDir/usr/bin_tmp/pyside2-rcc AppDir/usr/bin/
+# cp AppDir/usr/bin_tmp/pyside2-rcc AppDir/usr/bin/
 cp AppDir/usr/bin_tmp/assistant AppDir/usr/bin/
 sed -i '1s|.*|#!/usr/bin/env python|' AppDir/usr/bin/pip
 rm -rf AppDir/usr/bin_tmp
@@ -61,8 +61,8 @@ find . -name "*.cmake" -type f -delete
 cp ../../libc6/lib/x86_64-linux-gnu/libnsl* AppDir/usr/lib/
 
 # Add documentation
-mkdir -p AppDir/usr/share/doc/FreeCAD/
-cp ../../doc/* AppDir/usr/share/doc/FreeCAD/
+# mkdir -p AppDir/usr/share/doc/FreeCAD/
+# cp ../../doc/* AppDir/usr/share/doc/FreeCAD/
 
 # create the appimage
 chmod a+x ./AppDir/AppRun

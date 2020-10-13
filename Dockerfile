@@ -65,6 +65,6 @@ RUN set -ex; \
         wget \
         libfuse2 \
 		; \
-		rm -rf /var/lib/apt/lists/*; \
+		# rm -rf /var/lib/apt/lists/*; \
     fi
 

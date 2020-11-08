@@ -1,6 +1,9 @@
 # Set current dir as home
 export HOME=`pwd`
 
+export PATH=$PATH:`pwd`/AppDir/usr/bin
+export LD_LIBRARY_PATH=`pwd`/AppDir/usr/lib:$LD_LIBRARY_PATH
+
 # update conda
 conda update -n base -c defaults conda
 
@@ -15,6 +18,8 @@ conda create \
     -c conda-forge \
     -y
 
+conda run -p AppDir/usr pip install https://github.com/looooo/freecad_pipintegration/archive/master.zip
+
 # uninstall some packages not needed
 conda uninstall -p AppDir/usr gtk2 gdk-pixbuf llvm-tools \
                               llvmdev clangdev clang clang-tools \
@@ -28,18 +33,18 @@ sed -i "1s/.*/\n\nLIST OF PACKAGES:/"  AppDir/packages.txt
 # delete unnecessary stuff
 rm -rf AppDir/usr/include
 find AppDir/usr -name \*.a -delete
-mv AppDir/usr/bin AppDir/usr/bin_tmp
-mkdir AppDir/usr/bin
-cp AppDir/usr/bin_tmp/FreeCAD AppDir/usr/bin/
-cp AppDir/usr/bin_tmp/FreeCADCmd AppDir/usr/bin/
-cp AppDir/usr/bin_tmp/ccx AppDir/usr/bin/
-cp AppDir/usr/bin_tmp/python AppDir/usr/bin/
-cp AppDir/usr/bin_tmp/pip AppDir/usr/bin/
-# cp AppDir/usr/bin_tmp/pyside2-rcc AppDir/usr/bin/
-cp AppDir/usr/bin_tmp/assistant AppDir/usr/bin/
-sed -i '1s|.*|#!/usr/bin/env python|' AppDir/usr/bin/pip
-rm -rf AppDir/usr/bin_tmp
-#+ deleting some specific libraries not needed. eg.: stdc++
+# mv AppDir/usr/bin AppDir/usr/bin_tmp
+# mkdir AppDir/usr/bin
+# cp AppDir/usr/bin_tmp/FreeCAD AppDir/usr/bin/
+# cp AppDir/usr/bin_tmp/FreeCADCmd AppDir/usr/bin/
+# cp AppDir/usr/bin_tmp/ccx AppDir/usr/bin/
+# cp AppDir/usr/bin_tmp/python AppDir/usr/bin/
+# cp AppDir/usr/bin_tmp/pip AppDir/usr/bin/
+# # cp AppDir/usr/bin_tmp/pyside2-rcc AppDir/usr/bin/
+# cp AppDir/usr/bin_tmp/assistant AppDir/usr/bin/
+# sed -i '1s|.*|#!/usr/bin/env python|' AppDir/usr/bin/pip
+# rm -rf AppDir/usr/bin_tmp
+# #+ deleting some specific libraries not needed. eg.: stdc++
 
 #copy qt.conf
 cp qt.conf AppDir/usr/bin/
@@ -59,6 +64,8 @@ find . -name "*.h" -type f -delete
 find . -name "*.cmake" -type f -delete
 # Add libnsl (Fedora 28 and up)
 cp ../../libc6/lib/x86_64-linux-gnu/libnsl* AppDir/usr/lib/
+cp /usr/lib/x86_64-linux-gnu/libshiboken2* AppDir/usr/lib/
+cp /usr/lib/x86_64-linux-gnu/libpyside2* AppDir/usr/lib
 
 # Add documentation
 # mkdir -p AppDir/usr/share/doc/FreeCAD/
@@ -66,8 +73,11 @@ cp ../../libc6/lib/x86_64-linux-gnu/libnsl* AppDir/usr/lib/
 
 # create the appimage
 chmod a+x ./AppDir/AppRun
-rm *.AppImage
-ARCH=x86_64 ../../appimagetool-x86_64.AppImage \
+rm -f *.AppImage
+
+../../appimagetool-x86_64.AppImage --appimage-extract
+
+ARCH=x86_64 ./squashfs-root/AppRun \
   -u "gh-releases-zsync|FreeCAD|FreeCAD|$DEPLOY_RELEASE|FreeCAD*glibc2.12-x86_64.AppImage.zsync" \
   AppDir  ${version_name}.AppImage
 

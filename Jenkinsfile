@@ -59,7 +59,7 @@ pipeline {
 
   post {
     always {
-      archiveArtifacts artifacts: './build/FreeCAD/*', fingerprint: true
+      archiveArtifacts artifacts: 'build/FreeCAD/*', fingerprint: true
     }
     success {
       archiveArtifacts artifacts: '*.AppImage', fingerprint: true
